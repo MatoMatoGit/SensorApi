@@ -11,7 +11,7 @@ produces:
 basePath: "/api"
 
 # Paths supported by the server application
-
+paths:
   /v1/sensors:
     get:
       operationId: sensors.get_all
