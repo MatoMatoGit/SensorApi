@@ -1,0 +1,70 @@
+swagger: "2.0"
+info:
+  description: This is the swagger file that goes with our server code
+  version: "1.0.0"
+  title: Swagger REST Article
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+
+basePath: "/api"
+
+# Paths supported by the server application
+
+  /v1/sensors:
+    get:
+      operationId: sensors.get_all
+      tags:
+        - Sensors
+      summary: Get all available sensor devices.
+      description: Get all available sensor devices.
+      responses:
+        200:
+          description: Successfully fetched all devices.
+
+  /v1/sensors/{dev_id}:
+    get:
+      operationId: sensors.get_types
+      tags:
+        - Sensors
+      summary: Get all sensor types for this device.
+      description: Get all sensor types for this device.
+      parameters:
+        - name: dev_id
+          in: path
+          description: Device ID (DevEUI).
+          type: string
+          required: True
+      responses:
+        200:
+          description: Successfully fetched all sensor types for this device.
+          schema:
+            properties:
+              sensor_types:
+                type: array
+
+  /v1/sensors/{dev_id}/{sensor_type}:
+    get:
+      operationId: sensors.get_values
+      tags:
+        - Sensors
+      summary: Get all measurement values for this sensor type from this device.
+      description: Get all measurement values for this sensor type from this device.
+      parameters:
+        - name: dev_id
+          in: path
+          description: Device ID (DevEUI).
+          type: string
+          required: True
+        - name: sensor_type
+          in: path
+          type: string
+          description: Sensor type, can be any type available for this device.
+          required: True
+      responses:
+        200:
+          description: Successfully fetched all measurements for this sensors type.
+
+      
+            
